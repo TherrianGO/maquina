@@ -74,7 +74,6 @@
     ];
 
     function delay (ms) {
-        // alert("La resolución de tu pantalla es: " + screen.width + " x " + screen.height)
         return new Promise((resolve,reject) => setTimeout(resolve,ms));
     }
 
@@ -82,7 +81,7 @@
         let espacio = false;
         let numCh = 0;
         let tamanoFuente = screen.width < 1920 ? "10" : "12";
-
+        await delay(5000);
         for (let i=0; i<textList.length; i++){
             
             if (i==0 || textList[i].length == 0){
@@ -102,9 +101,6 @@
                     element.classList.remove("typingText");
                     espacio = false;
                 }
-                
-                
-                    
                 document.getElementById('divText').innerHTML += `<div id="rowline_${i}" class="typingText" style="font-family: monospace; font-size: ${tamanoFuente}px; ">${textList[i]}</div>`;
             }
         }
