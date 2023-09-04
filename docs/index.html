@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/images/jigglypuff.ico">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background-image: url("/images/maquina002.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: fixed;
+    }
+    .typingText{
+        display: block;
+        font-family: monospace;
+        white-space: nowrap;
+        border-right: 4px solid;
+        width: 50ch;
+
+        animation: typing 3s steps(12), blink .5s infinite step-end alternate;
+        overflow: hidden;
+    }
+
+    @keyframes typing{
+        from { width: 0; }
+    }
+
+    @keyframes blink{
+        50% { border-color: transparent; }
+    }
+
+    #divText{
+        margin-top: 10%;
+        margin-left: 38%;
+    }
+
+</style>
+    <div id="divText"></div>
+</body>
+</html>
+
+<script>
+    const textList = [
+        'Es verdad, como un flojo me agoto',
+        'Y que el tiempo de en mi cabeza asi es de corto',
+        'Pero entiendo que cuando hay que hacerlo',
+        'Si, perdón.',
+        '',
+        'Y cuando veo el mundo a un corto plazo',
+        'Desde un te quiero hasta la oreja a quien hablo',
+        'Pero entiendo que cuando hay que hacerlo',
+        'Si, perdón.',
+        '',
+        'Hay espacios, donde me cuesta asumir',
+        'La madurez que me mira y se pone a insistir',
+        'Pero entiendo que cuando hay que hacerlo',
+        'Si, perdón.',
+        '',
+        'Pero quiero ahora no prometerte',
+        'He conseguido poco con eso',
+        'Solo quiero enamorarte',
+        'De esa manera tan bonita ',
+        'No sé si eso justifique muchas sonseras',
+        'De momento ver si puedo unir',
+        'Mi pasión y mi amor en un solo proyecto',
+        '… Y bonito quedó',
+        '',
+        'Disculpa por estos malos ratos.      Te quiero Ingrid<3'
+    ];
+
+    function delay (ms) {
+        // alert("La resolución de tu pantalla es: " + screen.width + " x " + screen.height)
+        return new Promise((resolve,reject) => setTimeout(resolve,ms));
+    }
+
+    async function test () {
+        let espacio = false;
+        let numCh = 0;
+        let tamanoFuente = screen.width < 1920 ? "10" : "12";
+
+        for (let i=0; i<textList.length; i++){
+            
+            if (i==0 || textList[i].length == 0){
+                await delay(0);
+            }else{
+                await delay(2000);
+
+            }
+
+            if (textList[i].length == 0){
+                document.getElementById('divText').innerHTML += '<p style="margin: 1%"/>';
+                espacio = true;
+            }else{
+                if (i > 0 ) {
+                    let idRow = espacio ? i-2 : i -1;
+                    let element = document.getElementById(`rowline_${idRow}`);
+                    element.classList.remove("typingText");
+                    espacio = false;
+                }
+                
+                
+                    
+                document.getElementById('divText').innerHTML += `<div id="rowline_${i}" class="typingText" style="font-family: monospace; font-size: ${tamanoFuente}px; ">${textList[i]}</div>`;
+            }
+        }
+    }
+
+test();
+
+    
+</script>
